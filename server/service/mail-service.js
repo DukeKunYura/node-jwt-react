@@ -14,7 +14,6 @@ class MailService {
         })
     }
 
-
     async sendActivationMail(to, link) {
         await this.transporter.sendMail({
             from: process.env.EMAIL,
@@ -26,9 +25,31 @@ class MailService {
                     <a href="${link}">${link}</a>
                 </div>`
         })
-
     }
 
+    // constructor() {
+    //     this.transporter = nodemailer.createTransport({
+    //         host: 'smtp.spaceweb.ru',
+    //         port: 465,
+    //         secure: true,
+    //         auth: {
+    //             user: process.env.EMAIL_GBP,
+    //             pass: process.env.PASS_GBP
+    //         }
+    //     })
+    // }
+
+    // async sendActivationMail(to, link) {
+    //     await this.transporter.sendMail({
+    //         from: process.env.EMAIL_GBP,
+    //         to: process.env.EMAIL,
+    //         subject: 'Тест',
+    //         html:
+    //             `<div>
+    //                 <h1>Письмо</h1>
+    //             </div>`
+    //     })
+    // }
 
 }
 

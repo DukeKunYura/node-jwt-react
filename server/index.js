@@ -6,7 +6,7 @@ const { default: mongoose } = require('mongoose');
 const router = require('./router/index');
 
 const PORT = process.env.PORT || 5000;
-const URL = process.env.BD_URL;
+const URL = process.env.DB_URL;
 
 const app = express();
 

@@ -5,6 +5,7 @@ const mailService = require('../service/mail-service');
 const tokenService = require('../service/token-service');
 const UserDto = require('../dtos/user-dto');
 const ApiError = require('../exceptions/api-error');
+const userModel = require('../models/user-model');
 
 class UserService {
     async registration(email, password) {
@@ -41,6 +42,28 @@ class UserService {
         if (!isPassEquals) {
             throw ApiError.BadRequest(`Неверный пароль`);
         }
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return { ...tokens, user: userDto }
+    }
+
+    async logout(refreshToken) {
+        const token = tokenService.removeTokens(refreshToken);
+        return token;
+    }
+
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw ApiError.UnautorizedError();
+        }
+        const userData = tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb = await tokenService.findTokens(refreshToken);
+        if (!userData || !tokenFromDb) {
+            throw ApiError.UnautorizedError();
+        }
+        const user = await userModel.findById(userData.id);
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({ ...userDto });
         await tokenService.saveToken(userDto.id, tokens.refreshToken);

@@ -1,0 +1,1 @@
+export type TAuth = "guest" | "user" | "admin";

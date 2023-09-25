@@ -1,33 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { TAuth } from '../../types/types';
+import { TUser } from '../../interfaces/interfaces';
 
 interface CounterState {
-    userName: string,
-    auth: TAuth
+    user: TUser,
+    auth: TAuth,
+    accessToken: string,
 }
 
 const initialState: CounterState = {
-    userName: "",
-    auth: "guest"
+    user: {
+        email: "",
+        id: "",
+        isActivated: false
+    },
+    auth: "guest",
+    accessToken: ""
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setUserName: (state, action) => {
-            state.userName = action.payload
+        setUser: (state, action) => {
+            state.user = action.payload
         },
         setAuth: (state, action) => {
-            console.log(action.payload);
+            state.auth = action.payload
+        },
+        setAccessToken: (state, action) => {
             state.auth = action.payload
         }
     }
 })
 
 
-export const { setUserName, setAuth } = authSlice.actions
+export const { setUser, setAuth } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth.auth
 

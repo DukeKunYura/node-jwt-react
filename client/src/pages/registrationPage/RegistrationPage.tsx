@@ -1,11 +1,10 @@
 import { FC, useEffect } from "react";
-import FormAuth from "../../components/form/FormAuth";
 import { setAuth } from "../../redux/slices/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import FormRegistration from "../../components/form/FormRegistration";
 import { setActiveLink } from "../../redux/slices/masterSlice";
 
-const LoginPage: FC = () => {
-    //const auth = useAppSelector((state) => state.auth.auth);
+const RegistrationPage: FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -14,7 +13,7 @@ const LoginPage: FC = () => {
 
     return (
         <div className="container">
-            <FormAuth />
+            <FormRegistration />
             <button
                 type="button"
                 className="btn btn-warning"
@@ -26,4 +25,4 @@ const LoginPage: FC = () => {
         </div>
     )
 }
-export default LoginPage;
+export default RegistrationPage;

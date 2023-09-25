@@ -6,3 +6,20 @@ export interface IPostResponse {
 }
 
 export type IPostResponses = IPostResponse[];
+
+export interface RegisterUserRequestBody {
+    email: string;
+    password: string;
+}
+
+export type TUser = {
+    email: string,
+    id: string,
+    isActivated: boolean
+};
+
+export interface RegisterUserResponseBody {
+    accessToken: string;
+    refreshToken: string;
+    user: TUser;
+};

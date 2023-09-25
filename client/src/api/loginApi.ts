@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-// const host = process.env.REACT_APP_HOST as string;
-// const port = process.env.REACT_APP_FEEDBACK_PORT as string;
+import { RegisterUserRequestBody, RegisterUserResponseBody } from '../interfaces/interfaces';
 const host = import.meta.env.VITE_HOST;
 const port = import.meta.env.VITE_PORT;
 
@@ -16,12 +14,14 @@ export const loginApi = createApi({
     }),
     endpoints: (build) => ({
         // регистрация
-        registration: build.mutation({
+        registration: build.mutation<RegisterUserResponseBody, RegisterUserRequestBody>({
             query: (data) => ({
                 url: 'registration/',
                 method: 'POST',
                 body: data
             })
+
+
         }),
         // вход
         login: build.mutation({
@@ -30,10 +30,19 @@ export const loginApi = createApi({
                 method: 'POST',
                 body: data
             })
+        }),
+        // выход
+        logout: build.mutation({
+            query: (data) => ({
+                url: 'logout/',
+                method: 'POST',
+                body: data
+            })
         })
     })
 });
 export const {
     useRegistrationMutation,
-    useLoginMutation
+    useLoginMutation,
+    useLogoutMutation
 } = loginApi;

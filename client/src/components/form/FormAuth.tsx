@@ -1,12 +1,16 @@
 import { FC, useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useLoginMutation } from "../../api/loginApi";
+import { useNavigate } from "react-router-dom";
+import { setActiveLink } from "../../redux/slices/masterSlice";
 
 const FormAuth: FC = () => {
     const auth = useAppSelector((state) => state.auth.auth);
     const [sendData, { isLoading }] = useLoginMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
 
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
@@ -16,12 +20,17 @@ const FormAuth: FC = () => {
         setPassword('');
     }
 
+    const handleRegistrationLink = () => {
+        dispatch(setActiveLink('Login'));
+        navigate('/registration');
+    }
+
     return (
         <div className="container">
             <br />
             <div className="card">
                 <div className="card-header">
-                    {isLoading ? "loading..." : "Log in"}
+                    {isLoading ? "loading..." : "Log-in"}
                 </div>
                 <div className="card-body">
                     <form onSubmit={(e) => { handleLogin(e) }}>
@@ -47,9 +56,19 @@ const FormAuth: FC = () => {
                         </div>
                         <div className="mb-3 form-check">
                             <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                            <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                            <label className="form-check-label" htmlFor="exampleCheck1">Remember me</label>
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <div className="row gy-2 gx-3 align-items-center">
+                            <div className="col-auto">
+                                <button type="submit" className="btn btn-primary">Log-in</button>
+                            </div>
+                            <div className="col-auto">
+                                <button onClick={handleRegistrationLink} type="button" className="btn btn-outline-secondary">Registration</button>
+                            </div>
+                        </div>
+
+
+
                     </form>
                 </div>
             </div>

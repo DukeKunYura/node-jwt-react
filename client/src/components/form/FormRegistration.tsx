@@ -1,20 +1,36 @@
-import { FC, useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
+import { FC, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useRegistrationMutation } from "../../api/loginApi";
+import { setUser } from "../../redux/slices/authSlice";
+import Spinner from "../Spinner";
 
 const FormRegistration: FC = () => {
     const auth = useAppSelector((state) => state.auth.auth);
-    const [sendData, { isLoading }] = useRegistrationMutation();
+    const [sendData, { data, isLoading, isError, isSuccess }] = useRegistrationMutation();
+    const dispatch = useAppDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordMessage, setPasswordMessage] = useState('');
 
     const handleRegistration = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        sendData({ email, password });
-        setEmail('');
-        setPassword('');
+        if (password === confirmPassword && email !== '') {
+            setPasswordMessage('');
+            sendData({ email, password });
+            setEmail('');
+            setPassword('');
+            setConfirmPassword('');
+        } else {
+            setPasswordMessage('пароли не совпадают');
+        }
     }
+
+    useEffect(() => {
+        if (data) {
+            dispatch(setUser(data.user));
+        }
+    }, [data]);
 
     return (
         <div className="container">
@@ -45,11 +61,28 @@ const FormRegistration: FC = () => {
                                 onChange={(e) => { setPassword(e.target.value) }}
                                 id="exampleInputPassword1" />
                         </div>
-                        <div className="mb-3 form-check">
-                            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                            <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+                        <div className="mb-3">
+                            <label htmlFor="exampleInputPassword2" className="form-label">Confirm password</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                value={confirmPassword}
+                                onChange={(e) => { setConfirmPassword(e.target.value) }}
+                                id="exampleInputPassword2" />
+                            <div id="passwordHelp" className="form-text">
+                                {passwordMessage !== '' && passwordMessage}
+                            </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <div className="row gy-2 gx-3 align-items-center">
+                            <div className="col-auto">
+                                <button type="submit" className="btn btn-primary">Send</button>
+                            </div>
+                            <div className="col-auto">
+                                {isLoading && <Spinner />}
+                                {isError && 'Ошибка при регистрации'}
+                                {isSuccess && 'Регистрация прошла успешно!'}
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

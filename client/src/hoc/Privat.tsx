@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useLocation, Navigate } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setActiveLink } from "../redux/slices/masterSlice";
 
 
 type Props = {
@@ -10,8 +11,10 @@ type Props = {
 const Privat: FC<Props> = (props: Props) => {
     const location = useLocation();
     const auth = useAppSelector((state) => state.auth.auth);
+    const dispatch = useAppDispatch();
 
     if (auth === "guest") {
+        dispatch(setActiveLink("Login"));
         return <Navigate to='/login' state={{ from: location }} />
 
     };

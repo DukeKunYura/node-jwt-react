@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     search: "",
-    activeLink: "home",
+    activeLink: "Home",
     isActivePersonAdder: false,
     isActiveCarAdder: false,
     isActiveCarRegistration: false

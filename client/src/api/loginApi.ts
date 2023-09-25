@@ -17,17 +17,23 @@ export const loginApi = createApi({
     endpoints: (build) => ({
         // регистрация
         registration: build.mutation({
-            query: () => ({
+            query: (data) => ({
                 url: 'registration/',
                 method: 'POST',
-                body: {
-                    email: "mail777@mail.ru",
-                    password: "888888"
-                }
+                body: data
+            })
+        }),
+        // вход
+        login: build.mutation({
+            query: (data) => ({
+                url: 'login/',
+                method: 'POST',
+                body: data
             })
         })
     })
 });
 export const {
-    useRegistrationMutation
+    useRegistrationMutation,
+    useLoginMutation
 } = loginApi;

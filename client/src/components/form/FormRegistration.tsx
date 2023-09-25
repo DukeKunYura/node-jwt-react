@@ -1,15 +1,15 @@
 import { FC, useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
-import { useLoginMutation } from "../../api/loginApi";
+import { useRegistrationMutation } from "../../api/loginApi";
 
-const FormAuth: FC = () => {
+const FormRegistration: FC = () => {
     const auth = useAppSelector((state) => state.auth.auth);
-    const [sendData, { isLoading }] = useLoginMutation();
+    const [sendData, { isLoading }] = useRegistrationMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
 
-    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleRegistration = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         sendData({ email, password });
         setEmail('');
@@ -21,10 +21,10 @@ const FormAuth: FC = () => {
             <br />
             <div className="card">
                 <div className="card-header">
-                    {isLoading ? "loading..." : "Log in"}
+                    {isLoading ? "loading..." : "Registration"}
                 </div>
                 <div className="card-body">
-                    <form onSubmit={(e) => { handleLogin(e) }}>
+                    <form onSubmit={(e) => { handleRegistration(e) }}>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                             <input
@@ -58,4 +58,4 @@ const FormAuth: FC = () => {
         </div>
     )
 }
-export default FormAuth;
+export default FormRegistration;

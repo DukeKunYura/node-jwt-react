@@ -1,14 +1,17 @@
 import { FC } from "react";
 import FormAuth from "../../components/form/FormAuth";
 import { setAuth } from "../../redux/slices/authSlice";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import FormRegistration from "../../components/form/FormRegistration";
 
 const Login: FC = () => {
+    const auth = useAppSelector((state) => state.auth.auth);
     const dispatch = useAppDispatch();
 
     return (
         <div className="container">
-            <FormAuth />
+            {auth === "guest" && <FormRegistration />}
+            {auth === "admin" && <FormAuth />}
             <button
                 type="button"
                 className="btn btn-warning"

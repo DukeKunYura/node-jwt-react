@@ -7,12 +7,17 @@ const Login: FC = () => {
     const dispatch = useAppDispatch();
 
     return (
-        <>
+        <div className="container">
             <FormAuth />
-            <button onClick={() => { dispatch(setAuth("admin")) }}>Admin</button>
-            <button onClick={() => { dispatch(setAuth("guest")) }}>Guest</button>
-            <div>Login Page</div>
-        </>
+            <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => { dispatch(setAuth("admin")) }}>Admin</button>
+            <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => { dispatch(setAuth("guest")) }}>Guest</button>
+        </div>
     )
 }
 export default Login;

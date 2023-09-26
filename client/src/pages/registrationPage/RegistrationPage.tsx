@@ -22,6 +22,10 @@ const RegistrationPage: FC = () => {
                 type="button"
                 className="btn btn-warning"
                 onClick={() => { dispatch(setAuth("guest")) }}>Guest</button>
+            <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => { localStorage.setItem("test", "test") }}>local</button>
         </div>
     )
 }

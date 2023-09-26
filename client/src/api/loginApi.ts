@@ -7,10 +7,11 @@ export const loginApi = createApi({
     reducerPath: 'loginApi',
     baseQuery: fetchBaseQuery({
         baseUrl: `http://${host}:${port}/api/`,
+        credentials: "include",
         prepareHeaders: (headers) => {
             headers.set('Content-Type', 'application/json');
             return headers;
-        }
+        },
     }),
     endpoints: (build) => ({
         // регистрация

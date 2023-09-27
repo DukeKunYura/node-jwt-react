@@ -3,9 +3,11 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useLoginMutation } from "../../api/loginApi";
 import { useNavigate } from "react-router-dom";
 import { setActiveLink } from "../../redux/slices/masterSlice";
+import { login } from "../../services/authService";
+import { setRole, setUser } from "../../redux/slices/authSlice";
 
 const FormAuth: FC = () => {
-    const auth = useAppSelector((state) => state.auth.auth);
+    const auth = useAppSelector((state) => state.auth);
     const [sendData, { isLoading }] = useLoginMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,9 +15,15 @@ const FormAuth: FC = () => {
     const navigate = useNavigate();
 
 
-    const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        sendData({ email, password });
+        //sendData({ email, password });
+        const response = await login(email, password);
+        if (response) {
+            localStorage.setItem('token', response.data.accessToken);
+            dispatch(setUser(response.data.user));
+            dispatch(setRole('user'));
+        }
         setEmail('');
         setPassword('');
     }
@@ -72,7 +80,7 @@ const FormAuth: FC = () => {
                     </form>
                 </div>
             </div>
-            {auth}
+            {auth.role}
 
         </div>
     )

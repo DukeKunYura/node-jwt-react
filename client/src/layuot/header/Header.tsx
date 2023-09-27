@@ -2,10 +2,24 @@ import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setActiveLink } from "../../redux/slices/masterSlice";
 import { NavLink } from "react-router-dom";
+import { logout } from "../../services/authService";
+import { setRole, setUser } from "../../redux/slices/authSlice";
+import { TUser } from "../../interfaces/interfaces";
 
 const Header: FC = () => {
     const activeLink = useAppSelector((state) => state.master.activeLink);
+    const role = useAppSelector((state) => state.auth.role);
     const dispatch = useAppDispatch();
+
+    const handleLogout = async () => {
+        const response = await logout();
+        if (response) {
+            localStorage.removeItem('token');
+            dispatch(setRole('guest'));
+            dispatch(setUser({} as TUser));
+        }
+
+    }
 
     return (
         <>
@@ -57,15 +71,29 @@ const Header: FC = () => {
                                     Test
                                 </NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink
-                                    className={activeLink === "Login" ? "nav-link active" : "nav-link"}
-                                    to="/login"
-                                    onClick={() => { dispatch(setActiveLink("Login")) }}
-                                >
-                                    Login
-                                </NavLink>
-                            </li>
+                            {role === "guest"
+                                ?
+                                <li className="nav-item">
+                                    <NavLink
+                                        className={activeLink === "Login" ? "nav-link active" : "nav-link"}
+                                        to="/login"
+                                        onClick={() => { dispatch(setActiveLink("Login")) }}
+                                    >
+                                        Login
+                                    </NavLink>
+                                </li>
+                                :
+                                <li className="nav-item">
+                                    <NavLink
+                                        className={activeLink === "Login" ? "nav-link active" : "nav-link"}
+                                        to="/"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </NavLink>
+                                </li>
+                            }
+
                         </ul>
                         <form className="d-flex">
                             <input

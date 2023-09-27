@@ -23,14 +23,14 @@ export const authSlice = createSlice({
         setUser: (state, action: PayloadAction<TUser>) => {
             state.user = action.payload
         },
-        setAuth: (state, action: PayloadAction<TAuth>) => {
+        setRole: (state, action: PayloadAction<TAuth>) => {
             state.role = action.payload
         },
     }
 })
 
 
-export const { setUser, setAuth } = authSlice.actions
+export const { setUser, setRole } = authSlice.actions
 
 export const selectAuth = (state: RootState) => state.auth
 

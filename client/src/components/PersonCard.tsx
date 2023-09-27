@@ -3,10 +3,6 @@ import { TUser } from "../interfaces/interfaces";
 
 const PersonCard: FC<TUser> = ({ email, id, isActivated }) => {
 
-
-
-
-
     return (
         <div>
             {email}

@@ -13,7 +13,7 @@ const PersonPage: FC = () => {
             {isLoading && <Spinner />}
             {isSuccess && data.map(item =>
                 <PersonCard
-                    key={item.id}
+                    key={item.email}
                     email={item.email}
                     id={item.id}
                     isActivated={item.isActivated}

@@ -15,18 +15,16 @@ export const login = async (email: string, password: string) => {
     try {
         return await instance.post<IAuthResponse>("/login", { email, password });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 
 }
 
 export const registration = async (email: string, password: string) => {
     try {
-        console.log(email + " " + password);
-        return await instance.post<IAuthResponse>("/registration", { email, password })
-            .then(res => console.log(res.data));
+        return await instance.post<IAuthResponse>("/registration", { email, password });
     } catch (error) {
-
+        console.log(error);
     }
 
 }
@@ -34,9 +32,9 @@ export const registration = async (email: string, password: string) => {
 export const logout = async () => {
     try {
         console.log('logout');
-        return await instance.post<IAuthResponse>("/logout")
+        return await instance.post<IAuthResponse>("/logout");
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 
 }

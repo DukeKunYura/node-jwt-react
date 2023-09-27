@@ -1,37 +1,37 @@
 import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { useRegistrationMutation } from "../../api/loginApi";
-import { setUser } from "../../redux/slices/authSlice";
+import { setRole, setUser } from "../../redux/slices/authSlice";
 import Spinner from "../Spinner";
+import { registration } from "../../services/authService";
 
 const FormRegistration: FC = () => {
     const auth = useAppSelector((state) => state.auth);
-    const [sendData, { data, isLoading, isError, isSuccess }] = useRegistrationMutation();
     const dispatch = useAppDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleRegistration = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsLoading(true)
         if (password === confirmPassword && email !== '') {
             setPasswordMessage('');
-            sendData({ email, password });
+            const response = await registration(email, password);
+            if (response) {
+                localStorage.setItem('token', response.data.accessToken);
+                dispatch(setUser(response.data.user));
+                dispatch(setRole('user'));
+            }
             setEmail('');
             setPassword('');
             setConfirmPassword('');
         } else {
             setPasswordMessage('пароли не совпадают');
         }
+        setIsLoading(false);
     }
-
-    useEffect(() => {
-        if (data) {
-            dispatch(setUser(data.user));
-            localStorage.setItem('access_token', data.accessToken);
-        }
-    }, [data]);
 
     return (
         <div className="container">
@@ -80,8 +80,6 @@ const FormRegistration: FC = () => {
                             </div>
                             <div className="col-auto">
                                 {isLoading && <Spinner />}
-                                {isError && 'Ошибка при регистрации'}
-                                {isSuccess && 'Регистрация прошла успешно!'}
                             </div>
                         </div>
                     </form>

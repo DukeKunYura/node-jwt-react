@@ -32,7 +32,7 @@ const RegistrationPage: FC = () => {
             <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => { dispatch(setRole("guest")) }}>Guest</button>
+                onClick={() => { dispatch(setRole("user")) }}>User</button>
             <button
                 type="button"
                 className="btn btn-warning"

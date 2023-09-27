@@ -18,7 +18,6 @@ const Header: FC = () => {
             dispatch(setRole('guest'));
             dispatch(setUser({} as TUser));
         }
-
     }
 
     return (
@@ -47,7 +46,7 @@ const Header: FC = () => {
                             <li className="nav-item">
                                 <NavLink
                                     className={activeLink === "Home" ? "nav-link active" : "nav-link"}
-                                    to="/"
+                                    to="/home"
                                     onClick={() => { dispatch(setActiveLink("Home")) }}
                                 >
                                     Home
@@ -86,7 +85,7 @@ const Header: FC = () => {
                                 <li className="nav-item">
                                     <NavLink
                                         className={activeLink === "Login" ? "nav-link active" : "nav-link"}
-                                        to="/"
+                                        to="/home"
                                         onClick={handleLogout}
                                     >
                                         Logout

@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
     credentials: "include",
     prepareHeaders: (headers) => {
         headers.set('Content-Type', 'application/json');
-        const authToken = localStorage.getItem('access_token');
+        const authToken = localStorage.getItem('token');
         if (authToken !== '') {
             headers.set('Authorization', `Bearer ${authToken}`);
         }
@@ -33,22 +33,14 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 ) => {
     let result = await baseQuery(args, api, extraOptions);
     if (result.error && result.error.status === 401) {
-        // try to get a new token
+        // попытка получить новый токен
         const refreshResult = await tokenQuery(`refresh`, api, extraOptions);
-        console.log(refreshResult);
         if (refreshResult.data) {
             const refeshTokenResult = refreshResult.data as any;
-            // set the new token
-            localStorage.setItem('access_token', refeshTokenResult.accessToken);
-            // retry the initial query
+            // в случае успеха токен сохраняется в localStorage
+            localStorage.setItem('token', refeshTokenResult.accessToken);
+            // повтор исходного запроса
             result = await baseQuery(args, api, extraOptions);
-        } else {
-            // const authToken = localStorage.getItem('refresh_token');
-            // if (authToken) {
-            //     await api.dispatch(fetchLogout(authToken));
-            // }
-            // localStorage.removeItem('access_token');
-            // localStorage.removeItem('refresh_token');
         }
     }
     return result;

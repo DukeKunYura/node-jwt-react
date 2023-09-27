@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import FormAuth from "../../components/form/FormAuth";
-import { setAuth } from "../../redux/slices/authSlice";
+import { setRole } from "../../redux/slices/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import { setActiveLink } from "../../redux/slices/masterSlice";
 
@@ -18,11 +18,11 @@ const LoginPage: FC = () => {
             <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => { dispatch(setAuth("admin")) }}>Admin</button>
+                onClick={() => { dispatch(setRole("admin")) }}>Admin</button>
             <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => { dispatch(setAuth("guest")) }}>Guest</button>
+                onClick={() => { dispatch(setRole("guest")) }}>Guest</button>
         </div>
     )
 }

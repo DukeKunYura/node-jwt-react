@@ -1,10 +1,14 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { setAuth } from "../../redux/slices/authSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import FormRegistration from "../../components/form/FormRegistration";
 import { setActiveLink } from "../../redux/slices/masterSlice";
+import { useRefreshQuery } from "../../api/loginApi";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 
 const RegistrationPage: FC = () => {
+    const [click, setClick] = useState<null | boolean>(null);
+    const { data } = useRefreshQuery(click ?? skipToken);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -25,7 +29,7 @@ const RegistrationPage: FC = () => {
             <button
                 type="button"
                 className="btn btn-warning"
-                onClick={() => { localStorage.setItem("test", "test") }}>local</button>
+                onClick={() => { setClick(true) }}>local</button>
         </div>
     )
 }

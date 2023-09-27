@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useRegistrationMutation } from "../../api/loginApi";
-import { setUser } from "../../redux/slices/authSlice";
+import { setUser, setAccessToken } from "../../redux/slices/authSlice";
 import Spinner from "../Spinner";
 
 const FormRegistration: FC = () => {
@@ -29,6 +29,7 @@ const FormRegistration: FC = () => {
     useEffect(() => {
         if (data) {
             dispatch(setUser(data.user));
+            localStorage.setItem('access_token', data.accessToken);
         }
     }, [data]);
 

@@ -39,11 +39,18 @@ export const loginApi = createApi({
                 method: 'POST',
                 body: data
             })
-        })
+        }),
+        // рефреш
+        refresh: build.query({
+            query: () => ({
+                url: 'refresh/'
+            })
+        }),
     })
 });
 export const {
     useRegistrationMutation,
     useLoginMutation,
-    useLogoutMutation
+    useLogoutMutation,
+    useRefreshQuery,
 } = loginApi;

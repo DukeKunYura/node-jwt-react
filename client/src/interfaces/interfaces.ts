@@ -1,3 +1,7 @@
+export type TAuth = "guest" | "user" | "admin";
+
+export type TPageLink = "Home" | "Person" | "Login" | "Test"
+
 export interface IPostResponse {
     userId: number;
     id: number;

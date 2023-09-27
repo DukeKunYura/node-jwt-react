@@ -1,43 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { TAuth } from '../../types/types';
-import { TUser } from '../../interfaces/interfaces';
+import { TAuth, TUser } from '../../interfaces/interfaces';
 
-interface CounterState {
+interface AuthState {
     user: TUser,
-    auth: TAuth,
-    accessToken: string,
+    role: TAuth,
 }
 
-const initialState: CounterState = {
+const initialState: AuthState = {
     user: {
         email: "",
         id: "",
         isActivated: false
     },
-    auth: "guest",
-    accessToken: ""
+    role: "guest",
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setUser: (state, action) => {
+        setUser: (state, action: PayloadAction<TUser>) => {
             state.user = action.payload
         },
-        setAuth: (state, action) => {
-            state.auth = action.payload
+        setAuth: (state, action: PayloadAction<TAuth>) => {
+            state.role = action.payload
         },
-        setAccessToken: (state, action) => {
-            state.auth = action.payload
-        }
     }
 })
 
 
-export const { setUser, setAuth, setAccessToken } = authSlice.actions
+export const { setUser, setAuth } = authSlice.actions
 
-export const selectAuth = (state: RootState) => state.auth.auth
+export const selectAuth = (state: RootState) => state.auth
 
 export default authSlice.reducer

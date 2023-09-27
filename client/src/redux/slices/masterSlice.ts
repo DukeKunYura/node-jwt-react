@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { TPageLink } from '../../interfaces/interfaces';
 
 const initialState = {
     search: "",
@@ -13,30 +14,18 @@ export const masterSlice = createSlice({
     initialState,
     reducers: {
 
-        setSearch: (state, action) => {
+        setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload
         },
-        setActiveLink: (state, action) => {
+        setActiveLink: (state, action: PayloadAction<TPageLink>) => {
             state.activeLink = action.payload
         },
-        setIsActivePersonAdder: (state, action) => {
-            state.isActivePersonAdder = action.payload
-        },
-        setIsActiveCarAdder: (state, action) => {
-            state.isActiveCarAdder = action.payload
-        },
-        setIsActiveCarRegistration: (state, action) => {
-            state.isActiveCarRegistration = action.payload
-        }
     }
 })
 
 
 export const {
     setSearch,
-    setActiveLink,
-    setIsActivePersonAdder,
-    setIsActiveCarAdder,
-    setIsActiveCarRegistration } = masterSlice.actions
+    setActiveLink, } = masterSlice.actions
 
 export default masterSlice.reducer

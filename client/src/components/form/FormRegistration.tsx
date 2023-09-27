@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useRegistrationMutation } from "../../api/loginApi";
-import { setUser, setAccessToken } from "../../redux/slices/authSlice";
+import { setUser } from "../../redux/slices/authSlice";
 import Spinner from "../Spinner";
 
 const FormRegistration: FC = () => {
-    const auth = useAppSelector((state) => state.auth.auth);
+    const auth = useAppSelector((state) => state.auth);
     const [sendData, { data, isLoading, isError, isSuccess }] = useRegistrationMutation();
     const dispatch = useAppDispatch();
     const [email, setEmail] = useState('');
@@ -87,7 +87,7 @@ const FormRegistration: FC = () => {
                     </form>
                 </div>
             </div>
-            {auth}
+            {auth.role}
 
         </div>
     )

@@ -9,9 +9,9 @@ type Props = {
 
 const Privat: FC<Props> = (props: Props) => {
     const location = useLocation();
-    const auth = useAppSelector((state) => state.auth.auth);
+    const role = useAppSelector((state) => state.auth.role);
 
-    if (auth === "guest") {
+    if (role === "guest") {
         return <Navigate to='/login' state={{ from: location }} />
 
     };

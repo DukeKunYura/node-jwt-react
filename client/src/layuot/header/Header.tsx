@@ -9,6 +9,7 @@ import { TUser } from "../../interfaces/interfaces";
 const Header: FC = () => {
     const activeLink = useAppSelector((state) => state.master.activeLink);
     const role = useAppSelector((state) => state.auth.role);
+    const email = useAppSelector((state) => state.auth.user.email);
     const dispatch = useAppDispatch();
 
     const handleLogout = async () => {
@@ -70,6 +71,13 @@ const Header: FC = () => {
                                     Test
                                 </NavLink>
                             </li>
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link active"
+                                >
+                                    {email}
+                                </a>
+                            </li>
                             {role === "guest"
                                 ?
                                 <li className="nav-item">
@@ -85,14 +93,13 @@ const Header: FC = () => {
                                 <li className="nav-item">
                                     <NavLink
                                         className={activeLink === "Login" ? "nav-link active" : "nav-link"}
-                                        to="/home"
+                                        to=""
                                         onClick={handleLogout}
                                     >
                                         Logout
                                     </NavLink>
                                 </li>
                             }
-
                         </ul>
                         <form className="d-flex">
                             <input

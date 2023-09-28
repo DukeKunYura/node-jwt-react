@@ -11,6 +11,7 @@ import RegistrationPage from "../../pages/registrationPage/RegistrationPage";
 const Main: FC = () => {
     return (
         <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="registration" element={<RegistrationPage />} />
             <Route path="login" element={<LoginPage />} />

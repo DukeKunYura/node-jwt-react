@@ -9,6 +9,7 @@ import { TUser } from "../../interfaces/interfaces";
 const Header: FC = () => {
     const activeLink = useAppSelector((state) => state.master.activeLink);
     const role = useAppSelector((state) => state.auth.role);
+    const isActivated = useAppSelector((state) => state.auth.user.isActivated);
     const email = useAppSelector((state) => state.auth.user.email);
     const dispatch = useAppDispatch();
 
@@ -75,7 +76,7 @@ const Header: FC = () => {
                                 <a
                                     className="nav-link active"
                                 >
-                                    {email}
+                                    {isActivated && role !== "guest" && email}
                                 </a>
                             </li>
                             {role === "guest"

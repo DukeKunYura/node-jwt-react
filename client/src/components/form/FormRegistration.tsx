@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setRole, setUser } from "../../redux/slices/authSlice";
 import Spinner from "../Spinner";
 import { registration } from "../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const FormRegistration: FC = () => {
     const auth = useAppSelector((state) => state.auth);
@@ -12,6 +13,7 @@ const FormRegistration: FC = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordMessage, setPasswordMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -22,11 +24,10 @@ const FormRegistration: FC = () => {
             if (response) {
                 localStorage.setItem('token', response.data.accessToken);
                 dispatch(setUser(response.data.user));
-                dispatch(setRole('user'));
+                dispatch(setRole('guest'));
             }
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
+            navigate("/login");
+
         } else {
             setPasswordMessage('пароли не совпадают');
         }

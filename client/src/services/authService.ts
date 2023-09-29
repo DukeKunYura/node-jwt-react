@@ -13,7 +13,10 @@ const instance = axios.create({
 
 export const login = async (email: string, password: string) => {
     try {
-        return await instance.post<IAuthResponse>("/login", { email, password });
+        return await instance.post<IAuthResponse>(
+            "/login",
+            { email, password }
+        );
     } catch (error) {
         console.log(error);
     }
@@ -22,7 +25,10 @@ export const login = async (email: string, password: string) => {
 
 export const registration = async (email: string, password: string) => {
     try {
-        return await instance.post<IAuthResponse>("/registration", { email, password });
+        return await instance.post<IAuthResponse>(
+            "/registration",
+            { email, password }
+        );
     } catch (error) {
         console.log(error);
     }
@@ -36,5 +42,16 @@ export const logout = async () => {
     } catch (error) {
         console.log(error);
     }
+}
 
+export const checkAuth = async () => {
+    try {
+        console.log('check');
+        return await axios.get<IAuthResponse>(
+            `http://${host}:${port}/api/refresh`,
+            { withCredentials: true }
+        );
+    } catch (error) {
+        console.log(error);
+    }
 }

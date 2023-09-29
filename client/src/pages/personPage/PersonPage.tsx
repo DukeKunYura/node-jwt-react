@@ -23,13 +23,21 @@ const PersonPage: FC = () => {
                     <thead>
                         <tr>
                             <th scope="col">email</th>
-                            <th ></th>
-                            <th ></th>
-                            <th ></th>
-                            <th ></th>
-                            <th ></th>
-                            <th scope="col">id</th>
-                            <th ></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>id</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                             <th scope="col">activated</th>
                         </tr>
                     </thead>
@@ -37,14 +45,13 @@ const PersonPage: FC = () => {
             </div>
             <div className="container" style={{ overflowY: "scroll" }} >
                 {isLoading && <Spinner />}
-                <table className="table" >
+                <table className="table table-striped" >
                     <tbody >
-
                         {isSuccess && role !== "guest" && isActivated && data.map(item =>
                             <PersonCard
                                 key={item.email}
                                 email={item.email}
-                                id={item.id}
+                                _id={item._id}
                                 isActivated={item.isActivated}
                             />)}
                     </tbody>

@@ -8,6 +8,8 @@ import { setRole, setUser } from "../../redux/slices/authSlice";
 
 const FormAuth: FC = () => {
     const auth = useAppSelector((state) => state.auth);
+    const role = useAppSelector((state) => state.auth.role);
+    const isActivated = useAppSelector((state) => state.auth.user.isActivated);
     const [sendData, { isLoading }] = useLoginMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -38,7 +40,8 @@ const FormAuth: FC = () => {
             <br />
             <div className="card">
                 <div className="card-header">
-                    {isLoading ? "loading..." : "Log-in"}
+                    {isLoading ? "loading... " : "Log-in "}
+                    {!isActivated && role !== "guest" && " активируйте аккаунт"}
                 </div>
                 <div className="card-body">
                     <form onSubmit={(e) => { handleLogin(e) }}>

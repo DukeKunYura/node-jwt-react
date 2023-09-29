@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../../pages/homePage/HomePage";
 import LoginPage from "../../pages/loginPage/LoginPage";
@@ -7,8 +7,27 @@ import PersonPage from "../../pages/personPage/PersonPage";
 import TestSkip from "../../pages/testSkip/TestSkip";
 import NoMatchPage from "../../pages/noMatch/NoMatchPage";
 import RegistrationPage from "../../pages/registrationPage/RegistrationPage";
+import { useAppDispatch } from "../../redux/hooks";
+import { checkAuth } from "../../services/authService";
+import { setRole, setUser } from "../../redux/slices/authSlice";
 
 const Main: FC = () => {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        console.log("main");
+        const checker = async () => {
+            const response = await checkAuth();
+            if (response) {
+                console.log("good")
+                localStorage.setItem('token', response.data.accessToken);
+                dispatch(setUser(response.data.user));
+                dispatch(setRole('user'));
+            }
+        }
+        checker();
+    }, []);
+
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />

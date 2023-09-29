@@ -4,7 +4,7 @@ export type TPageLink = "Home" | "Person" | "Login" | "Test"
 
 export type TUser = {
     email: string,
-    id: string,
+    _id: string,
     isActivated: boolean
 }
 

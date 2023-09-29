@@ -4,6 +4,8 @@ import { setActiveLink } from "../../redux/slices/masterSlice";
 
 const Home: FC = () => {
     const role = useAppSelector((state) => state.auth.role);
+    const email = useAppSelector((state) => state.auth.user.email);
+    const isActivated = useAppSelector((state) => state.auth.user.isActivated);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -12,7 +14,9 @@ const Home: FC = () => {
 
     return (
         <>
-            {role}
+            {!isActivated && role !== "guest" && "активируйте аккаунт"}<br />
+            {role}<br />
+            {email}
             <div>Home Page</div>
         </>
     )

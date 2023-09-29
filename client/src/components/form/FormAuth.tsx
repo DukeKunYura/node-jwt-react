@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { useLoginMutation } from "../../api/loginApi";
 import { useNavigate } from "react-router-dom";
 import { setActiveLink } from "../../redux/slices/masterSlice";
 import { login } from "../../services/authService";
@@ -10,16 +9,16 @@ const FormAuth: FC = () => {
     const auth = useAppSelector((state) => state.auth);
     const role = useAppSelector((state) => state.auth.role);
     const isActivated = useAppSelector((state) => state.auth.user.isActivated);
-    const [sendData, { isLoading }] = useLoginMutation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        //sendData({ email, password });
+        setIsLoading(true);
         const response = await login(email, password);
         if (response) {
             localStorage.setItem('token', response.data.accessToken);
@@ -28,6 +27,7 @@ const FormAuth: FC = () => {
         }
         setEmail('');
         setPassword('');
+        setIsLoading(false);
     }
 
     const handleRegistrationLink = () => {
@@ -77,13 +77,9 @@ const FormAuth: FC = () => {
                                 <button onClick={handleRegistrationLink} type="button" className="btn btn-outline-secondary">Registration</button>
                             </div>
                         </div>
-
-
-
                     </form>
                 </div>
             </div>
-            {auth.role}
 
         </div>
     )

@@ -65,11 +65,11 @@ const Header: FC = () => {
                             </li>
                             <li className="nav-item">
                                 <NavLink
-                                    className={activeLink === "Test" ? "nav-link active" : "nav-link"}
-                                    to="/test"
-                                    onClick={() => { dispatch(setActiveLink("Test")) }}
+                                    className={activeLink === "Posts" ? "nav-link active" : "nav-link"}
+                                    to="/posts"
+                                    onClick={() => { dispatch(setActiveLink("Posts")) }}
                                 >
-                                    Test
+                                    Posts
                                 </NavLink>
                             </li>
                             <li className="nav-item">

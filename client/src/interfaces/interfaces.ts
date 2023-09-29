@@ -1,6 +1,6 @@
 export type TAuth = "guest" | "user" | "admin";
 
-export type TPageLink = "Home" | "Person" | "Login" | "Test"
+export type TPageLink = "Home" | "Person" | "Login" | "Posts"
 
 export type TUser = {
     email: string,

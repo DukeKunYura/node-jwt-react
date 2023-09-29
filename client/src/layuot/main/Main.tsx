@@ -4,9 +4,9 @@ import HomePage from "../../pages/homePage/HomePage";
 import LoginPage from "../../pages/loginPage/LoginPage";
 import Privat from "../../hoc/Privat";
 import PersonPage from "../../pages/personPage/PersonPage";
-import TestSkip from "../../pages/testSkip/TestSkip";
 import NoMatchPage from "../../pages/noMatch/NoMatchPage";
 import RegistrationPage from "../../pages/registrationPage/RegistrationPage";
+import PostsPage from "../../pages/testSkip/TestSkip";
 import { useAppDispatch } from "../../redux/hooks";
 import { checkAuth } from "../../services/authService";
 import { setRole, setUser } from "../../redux/slices/authSlice";
@@ -34,12 +34,8 @@ const Main: FC = () => {
             <Route path="/home" element={<HomePage />} />
             <Route path="registration" element={<RegistrationPage />} />
             <Route path="login" element={<LoginPage />} />
-            <Route path="person" element={<PersonPage />} />
-            <Route path="test" element={
-                <Privat>
-                    <TestSkip />
-                </Privat>
-            } />
+            <Route path="person" element={<Privat><PersonPage /></Privat>} />
+            <Route path="posts" element={<Privat><PostsPage /></Privat>} />
             <Route path="*" element={<NoMatchPage />} />
         </Routes>
 

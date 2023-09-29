@@ -17,7 +17,7 @@ const FormRegistration: FC = () => {
 
     const handleRegistration = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsLoading(true)
+        setIsLoading(true);
         if (password === confirmPassword && email !== '') {
             setPasswordMessage('');
             const response = await registration(email, password);

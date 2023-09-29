@@ -1,22 +1,25 @@
 import { FC } from "react";
-import { useGetPostByIdQuery, useGetPostsQuery } from "../../api/jsonplaceholderApi";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
+import { useGetPostsQuery } from "../../api/jsonplaceholderApi";
+import PostCard from "../../components/PostCard";
 
-const TestSkip: FC = () => {
+const PostsPage: FC = () => {
     const { data: posts } = useGetPostsQuery();
-    const { data: post } = useGetPostByIdQuery(posts ?? skipToken);
-    //const { data: post } = useGetPostByIdQuery(5);
 
 
 
     return (
-        <>
-            <div>TestSkip</div>
-            {posts && <div>посты</div>}
-            {post && post}
-        </>
+        <div className="container">
+            {posts && posts.map(item => <PostCard
+                key={item.id}
+                userId={item.userId}
+                id={item.id}
+                title={item.title}
+                body={item.body}
+            />)}
+
+        </div>
 
 
     )
 }
-export default TestSkip;
+export default PostsPage;

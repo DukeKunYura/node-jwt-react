@@ -37,7 +37,6 @@ export const registration = async (email: string, password: string) => {
 
 export const logout = async () => {
     try {
-        console.log('logout');
         return await instance.post<IAuthResponse>("/logout");
     } catch (error) {
         console.log(error);
@@ -46,7 +45,6 @@ export const logout = async () => {
 
 export const checkAuth = async () => {
     try {
-        console.log('check');
         return await axios.get<IAuthResponse>(
             `http://${host}:${port}/api/refresh`,
             { withCredentials: true }

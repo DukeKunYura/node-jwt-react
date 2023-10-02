@@ -1,17 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPostResponses } from '../interfaces/interfaces';
+import { IPostResponse } from '../interfaces/interfaces';
 
 export const jsonplaceholderApi = createApi({
     reducerPath: 'jsonplaceholderApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
     endpoints: (builder) => ({
-        getPosts: builder.query<IPostResponses, void>({
+        getPosts: builder.query<IPostResponse[], void>({
             query: () => `posts`,
         }),
-        getPostById: builder.query<string, number>({
-            queryFn: () => {
-                return { data: "88" };
-            },
+        getPostById: builder.query<IPostResponse, string>({
+            query: (id) => `posts/${id}`
         })
     }),
 })

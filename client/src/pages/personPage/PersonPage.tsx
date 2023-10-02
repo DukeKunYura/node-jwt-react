@@ -9,10 +9,6 @@ const PersonPage: FC = () => {
     const role = useAppSelector((state) => state.auth.role);
     const isActivated = useAppSelector((state) => state.auth.user.isActivated);
 
-
-    console.log("person page")
-
-
     return (
         <>
             <div className="container" >

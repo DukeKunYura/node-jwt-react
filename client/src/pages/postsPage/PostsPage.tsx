@@ -8,7 +8,7 @@ const PostsPage: FC = () => {
 
 
     return (
-        <div className="container">
+        <div className="container" style={{ overflowY: "scroll" }} >
             {posts && posts.map(item => <PostCard
                 key={item.id}
                 userId={item.userId}

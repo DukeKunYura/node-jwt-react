@@ -21,14 +21,10 @@ export interface IPostResponse {
     body: string
 }
 
-export type IPostResponses = IPostResponse[];
-
 export interface RegisterUserRequestBody {
     email: string;
     password: string;
 }
-
-
 
 export interface RegisterUserResponseBody {
     accessToken: string;

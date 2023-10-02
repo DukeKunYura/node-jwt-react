@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { IPostResponse } from "../interfaces/interfaces";
+import { useNavigate } from "react-router-dom";
 
 const PostCard: FC<IPostResponse> = ({
     userId,
@@ -7,6 +8,7 @@ const PostCard: FC<IPostResponse> = ({
     title,
     body,
 }) => {
+    const navigate = useNavigate();
 
     return (
         <>
@@ -16,7 +18,11 @@ const PostCard: FC<IPostResponse> = ({
                 <div className="card-body">
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{body}</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                    <a
+                        onClick={() => { navigate(`/post/${id}`) }}
+                        href="#"
+                        className="btn btn-primary"
+                    >Go somewhere</a>
                 </div>
             </div>
         </>

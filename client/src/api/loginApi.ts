@@ -21,8 +21,6 @@ export const loginApi = createApi({
                 method: 'POST',
                 body: data
             })
-
-
         }),
         // вход
         login: build.mutation({

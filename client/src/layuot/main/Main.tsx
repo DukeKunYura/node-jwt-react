@@ -11,6 +11,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { checkAuth } from "../../services/authService";
 import { setRole, setUser } from "../../redux/slices/authSlice";
 import PostPage from "../../pages/postPage/PostPage";
+import DnDPage from "../../pages/dndPage/DnDPage";
 
 const Main: FC = () => {
     const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ const Main: FC = () => {
             <Route path="person" element={<Privat><PersonPage /></Privat>} />
             <Route path="posts" element={<Privat><PostsPage /></Privat>} />
             <Route path="post/:id" element={<Privat><PostPage /></Privat>} />
+            <Route path="dnd" element={<Privat><DnDPage /></Privat>} />
             <Route path="*" element={<NoMatchPage />} />
         </Routes>
 

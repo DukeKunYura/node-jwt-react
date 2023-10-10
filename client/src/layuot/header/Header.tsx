@@ -73,6 +73,15 @@ const Header: FC = () => {
                                 </NavLink>
                             </li>
                             <li className="nav-item">
+                                <NavLink
+                                    className={activeLink === "DnD" ? "nav-link active" : "nav-link"}
+                                    to="/dnd"
+                                    onClick={() => { dispatch(setActiveLink("DnD")) }}
+                                >
+                                    DnD
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
                                 <a
                                     className="nav-link active"
                                 >

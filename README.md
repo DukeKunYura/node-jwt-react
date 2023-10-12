@@ -5,6 +5,7 @@ The application is written in React (typeScript) and uses the following technolo
 - Redux Toolkit with Persist and RTK Query for managing the application state and fetching data from the server
 - React router for routing and navigation
 - Bootstrap for build responsive web interfaces.
+- React-dnd for Drag and Drop.
 - Vite for building the application.
 
 the server and the client are started with the `npm start` 

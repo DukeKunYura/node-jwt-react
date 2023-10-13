@@ -2,14 +2,22 @@ import { FC } from "react";
 import { useGetPostByIdQuery } from "../../api/jsonplaceholderApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { skipToken } from "@reduxjs/toolkit/dist/query";
+import BreadCrumbs, { TBreadCrumb } from "../../components/BreadCrumbs";
 
 const PostPage: FC = () => {
     const params = useParams();
     const { data: post } = useGetPostByIdQuery(params.id ?? skipToken);
     const navigate = useNavigate();
 
+    const routes: TBreadCrumb[] = [
+        { breadcrumb: 'Posts', path: '/posts' },
+        { breadcrumb: 'Post', path: null }
+    ];
+
     return (
         <div className="container" >
+            <br />
+            <BreadCrumbs routes={routes} />
             <br />
             <div className="card text-center">
                 <div className="card-header">

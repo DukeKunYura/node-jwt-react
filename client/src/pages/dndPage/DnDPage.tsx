@@ -13,7 +13,7 @@ const DnDPage: FC = () => {
         "borderColor": "gray",
         "backgroundColor": "whitesmoke",
         "align-items": "center"
-    }
+    };
 
     return (
         <>

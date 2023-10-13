@@ -19,8 +19,7 @@ const PostCard: FC<IPostResponse> = ({
                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{body}</p>
                     <a
-                        onClick={() => { navigate(`/post/${id}`) }}
-                        href="#"
+                        onClick={() => { navigate(`/posts/${id}`) }}
                         className="btn btn-primary"
                     >Go somewhere</a>
                 </div>

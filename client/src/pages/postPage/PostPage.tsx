@@ -28,7 +28,6 @@ const PostPage: FC = () => {
                     <p className="card-text">{post?.body}</p>
                     <a
                         onClick={() => { navigate("/posts") }}
-                        href="#"
                         className="btn btn-primary"
                     >Back</a>
                 </div>

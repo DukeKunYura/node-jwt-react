@@ -36,7 +36,7 @@ const Main: FC = () => {
             <Route path="login" element={<LoginPage />} />
             <Route path="person" element={<Privat><PersonPage /></Privat>} />
             <Route path="posts" element={<Privat><PostsPage /></Privat>} />
-            <Route path="post/:id" element={<Privat><PostPage /></Privat>} />
+            <Route path="posts/:id" element={<Privat><PostPage /></Privat>} />
             <Route path="dnd" element={<Privat><DnDPage /></Privat>} />
             <Route path="*" element={<NoMatchPage />} />
         </Routes>

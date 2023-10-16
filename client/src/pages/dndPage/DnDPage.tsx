@@ -7,13 +7,32 @@ const DnDPage: FC = () => {
 
     const columnStyle = {
         "display": "flex",
-        "flex-direction": "column",
+        "flexDirection": "column",
         "margin": "6px",
         "border": "1px solid",
         "borderColor": "gray",
         "backgroundColor": "whitesmoke",
-        "align-items": "center"
+        "alignItems": "center"
     };
+
+    const arr = [1, 7, 6, 7, 8, 1, 5, 4];
+
+    const checker = (arr: number[]) => {
+        let newArr: number[] = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (!newArr.includes(arr[i])) {
+                newArr.push(arr[i])
+            } else {
+                let index = newArr.indexOf(arr[i]);
+                delete newArr[index];
+            }
+        }
+        return newArr.filter(el => el !== null);
+    };
+
+    const result = checker(arr);
+
+    console.log("result: " + result);
 
     return (
         <>

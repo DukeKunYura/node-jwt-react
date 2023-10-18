@@ -1,19 +1,19 @@
-import { DetailedHTMLProps, FC, HTMLAttributes, useEffect } from "react";
-import { useAppSelector } from "../../redux/hooks";
-import DnDCard from "../../components/DnDCard";
+import { FC, useEffect, useMemo, useState } from 'react';
+import { useAppSelector } from '../../redux/hooks';
+import DnDCard from '../../components/DnDCard';
 
 const DnDPage: FC = () => {
     const role = useAppSelector((state) => state.auth.role);
+    const [upd, setUpd] = useState(false);
 
     const columnStyle = {
-        "display": "flex",
-        "margin": "6px",
-        "border": "1px solid",
-        "borderColor": "gray",
-        "backgroundColor": "whitesmoke",
-        "alignItems": "center",
-        "flexDirection": "column"
-
+        display: 'flex',
+        margin: '6px',
+        border: '1px solid',
+        borderColor: 'gray',
+        backgroundColor: 'whitesmoke',
+        alignItems: 'center',
+        flexDirection: 'column',
     };
 
     const arr = [1, 7, 6, 7, 8, 1, 5, 4];
@@ -22,30 +22,17 @@ const DnDPage: FC = () => {
         let newArr: number[] = [];
         for (let i = 0; i < arr.length; i++) {
             if (!newArr.includes(arr[i])) {
-                newArr.push(arr[i])
+                newArr.push(arr[i]);
             } else {
                 let index = newArr.indexOf(arr[i]);
                 delete newArr[index];
             }
         }
-        return newArr.filter(el => el !== null);
-    };
-
-    const checkerHard = (arr: number[]) => {
-        const uniqueElements: { [key: number]: boolean } = {};
-        const result: number[] = [];
-
-        for (const num of arr) {
-            if (!uniqueElements[num]) {
-                uniqueElements[num] = true;
-                result.push(num);
-            }
-        }
-
-        return result;
+        return newArr.filter((el) => el !== null);
     };
 
     const checkerLight = (arr: number[]) => {
+        console.log('checker');
         const counts: { [key: number]: number } = {};
         const result: number[] = [];
 
@@ -62,32 +49,27 @@ const DnDPage: FC = () => {
         return result;
     };
 
-    const result = checkerLight(arr);
+    const mapperLight = () => {
+        return checkerLight(arr).map((item) => <p key={item}>{item}</p>);
+    };
 
-    console.log("result: " + result);
+    const memoResult = useMemo(mapperLight, []);
 
-    type TUuu = string | number | null;
-
-    const uuu: TUuu = "5";
-
-    const testFun = (uuu: number) => {
-        console.log(uuu);
-    }
-
-    testFun(uuu as unknown as number);
+    console.log('DnDPage render');
 
     useEffect(() => {
-        const list = document.querySelector("h3");
-        const el = document.createElement("a");
-        el.textContent = "DnD test";
+        const list = document.querySelector('h3');
+        const el = document.createElement('a');
+        el.textContent = 'DnD test';
         list?.appendChild(el);
-
-    }, [])
+    }, []);
 
     return (
         <>
             <div className="container">
                 <h3></h3>
+                {memoResult}
+                <button onClick={setUpd}>upd</button>
                 <br />
                 <div className="row align-items-start">
                     <div className="col" style={columnStyle}>
@@ -109,10 +91,8 @@ const DnDPage: FC = () => {
                         <DnDCard />
                     </div>
                 </div>
-
             </div>
         </>
-
-    )
-}
+    );
+};
 export default DnDPage;

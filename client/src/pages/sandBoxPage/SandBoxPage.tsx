@@ -36,6 +36,17 @@ const SandBoxPage: FC = () => {
         userDaniil.name = 'DD';
     }
 
+    const users = new Map();
+
+    users.set(1, 'one').set(2, 'two');
+    users.set(3, 'three');
+    users.forEach((user) => console.log('user: ' + user));
+
+    console.log(users.get(2));
+    console.log(users.entries());
+    console.log(users.keys());
+    console.log(users.values());
+
     const arr = [1, 7, 6, 7, 8, 1, 5, 4];
 
     const checker = (arr: number[]) => {
@@ -96,6 +107,9 @@ const SandBoxPage: FC = () => {
                 >
                     upd
                 </button>
+                {Array.from(users.values()).map((value) => (
+                    <div>{value}</div>
+                ))}
             </div>
         </>
     );

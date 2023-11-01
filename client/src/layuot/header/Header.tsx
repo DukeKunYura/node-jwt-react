@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setActiveLink } from "../../redux/slices/masterSlice";
-import { NavLink } from "react-router-dom";
-import { logout } from "../../services/authService";
-import { setRole, setUser } from "../../redux/slices/authSlice";
-import { TUser } from "../../interfaces/interfaces";
+import { FC } from 'react';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setActiveLink } from '../../redux/slices/masterSlice';
+import { NavLink } from 'react-router-dom';
+import { logout } from '../../services/authService';
+import { setRole, setUser } from '../../redux/slices/authSlice';
+import { TUser } from '../../interfaces/interfaces';
 
 const Header: FC = () => {
     const activeLink = useAppSelector((state) => state.master.activeLink);
@@ -20,7 +20,7 @@ const Header: FC = () => {
             dispatch(setRole('guest'));
             dispatch(setUser({} as TUser));
         }
-    }
+    };
 
     return (
         <>
@@ -29,7 +29,9 @@ const Header: FC = () => {
                     <NavLink
                         className="navbar-brand"
                         to="/"
-                        onClick={() => { dispatch(setActiveLink("Home")) }}
+                        onClick={() => {
+                            dispatch(setActiveLink('Home'));
+                        }}
                     >
                         Navbar
                     </NavLink>
@@ -40,89 +42,139 @@ const Header: FC = () => {
                         data-bs-target="#navbarText"
                         aria-controls="navbarText"
                         aria-expanded="false"
-                        aria-label="Toggle navigation">
+                        aria-label="Toggle navigation"
+                    >
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarText">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <NavLink
-                                    className={activeLink === "Home" ? "nav-link active" : "nav-link"}
+                                    className={
+                                        activeLink === 'Home'
+                                            ? 'nav-link active'
+                                            : 'nav-link'
+                                    }
                                     to="/home"
-                                    onClick={() => { dispatch(setActiveLink("Home")) }}
+                                    onClick={() => {
+                                        dispatch(setActiveLink('Home'));
+                                    }}
                                 >
                                     Home
                                 </NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink
-                                    className={activeLink === "Person" ? "nav-link active" : "nav-link"}
+                                    className={
+                                        activeLink === 'Person'
+                                            ? 'nav-link active'
+                                            : 'nav-link'
+                                    }
                                     to="/person"
-                                    onClick={() => { dispatch(setActiveLink("Person")) }}
+                                    onClick={() => {
+                                        dispatch(setActiveLink('Person'));
+                                    }}
                                 >
                                     Person
                                 </NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink
-                                    className={activeLink === "Posts" ? "nav-link active" : "nav-link"}
+                                    className={
+                                        activeLink === 'Posts'
+                                            ? 'nav-link active'
+                                            : 'nav-link'
+                                    }
                                     to="/posts"
-                                    onClick={() => { dispatch(setActiveLink("Posts")) }}
+                                    onClick={() => {
+                                        dispatch(setActiveLink('Posts'));
+                                    }}
                                 >
                                     Posts
                                 </NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink
-                                    className={activeLink === "DnD" ? "nav-link active" : "nav-link"}
+                                    className={
+                                        activeLink === 'DnD'
+                                            ? 'nav-link active'
+                                            : 'nav-link'
+                                    }
                                     to="/dnd"
-                                    onClick={() => { dispatch(setActiveLink("DnD")) }}
+                                    onClick={() => {
+                                        dispatch(setActiveLink('DnD'));
+                                    }}
                                 >
                                     DnD
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                <a
-                                    className="nav-link active"
+                                <NavLink
+                                    className={
+                                        activeLink === 'SandBox'
+                                            ? 'nav-link active'
+                                            : 'nav-link'
+                                    }
+                                    to="/sandbox"
+                                    onClick={() => {
+                                        dispatch(setActiveLink('SandBox'));
+                                    }}
                                 >
-                                    {isActivated && role !== "guest" && email}
+                                    Sandbox
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link active">
+                                    {isActivated && role !== 'guest' && email}
                                 </a>
                             </li>
-                            {role === "guest"
-                                ?
+                            {role === 'guest' ? (
                                 <li className="nav-item">
                                     <NavLink
-                                        className={activeLink === "Login" ? "nav-link active" : "nav-link"}
+                                        className={
+                                            activeLink === 'Login'
+                                                ? 'nav-link active'
+                                                : 'nav-link'
+                                        }
                                         to="/login"
-                                        onClick={() => { dispatch(setActiveLink("Login")) }}
+                                        onClick={() => {
+                                            dispatch(setActiveLink('Login'));
+                                        }}
                                     >
                                         Login
                                     </NavLink>
                                 </li>
-                                :
+                            ) : (
                                 <li className="nav-item">
                                     <NavLink
-                                        className={activeLink === "Login" ? "nav-link active" : "nav-link"}
+                                        className={
+                                            activeLink === 'Login'
+                                                ? 'nav-link active'
+                                                : 'nav-link'
+                                        }
                                         to=""
                                         onClick={handleLogout}
                                     >
                                         Logout
                                     </NavLink>
                                 </li>
-                            }
+                            )}
                         </ul>
                         <form className="d-flex">
                             <input
                                 className="form-control form-control-sm"
                                 type="search"
                                 placeholder="Search"
-                                aria-label="Search" />
-                            <button className="btn btn-dark" type="submit">Search</button>
+                                aria-label="Search"
+                            />
+                            <button className="btn btn-dark" type="submit">
+                                Search
+                            </button>
                         </form>
                     </div>
                 </div>
             </nav>
         </>
-    )
-}
+    );
+};
 export default Header;

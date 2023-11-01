@@ -1,17 +1,18 @@
-import { FC, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
-import HomePage from "../../pages/homePage/HomePage";
-import LoginPage from "../../pages/loginPage/LoginPage";
-import Privat from "../../hoc/Privat";
-import PersonPage from "../../pages/personPage/PersonPage";
-import NoMatchPage from "../../pages/noMatch/NoMatchPage";
-import RegistrationPage from "../../pages/registrationPage/RegistrationPage";
-import PostsPage from "../../pages/postsPage/PostsPage";
-import { useAppDispatch } from "../../redux/hooks";
-import { checkAuth } from "../../services/authService";
-import { setRole, setUser } from "../../redux/slices/authSlice";
-import PostPage from "../../pages/postPage/PostPage";
-import DnDPage from "../../pages/dndPage/DnDPage";
+import { FC, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from '../../pages/homePage/HomePage';
+import LoginPage from '../../pages/loginPage/LoginPage';
+import Privat from '../../hoc/Privat';
+import PersonPage from '../../pages/personPage/PersonPage';
+import NoMatchPage from '../../pages/noMatch/NoMatchPage';
+import RegistrationPage from '../../pages/registrationPage/RegistrationPage';
+import PostsPage from '../../pages/postsPage/PostsPage';
+import { useAppDispatch } from '../../redux/hooks';
+import { checkAuth } from '../../services/authService';
+import { setRole, setUser } from '../../redux/slices/authSlice';
+import PostPage from '../../pages/postPage/PostPage';
+import DnDPage from '../../pages/dndPage/DnDPage';
+import SandBoxPage from '../../pages/sandBoxPage/SandBoxPage';
 
 const Main: FC = () => {
     const dispatch = useAppDispatch();
@@ -24,7 +25,7 @@ const Main: FC = () => {
                 dispatch(setUser(response.data.user));
                 dispatch(setRole('user'));
             }
-        }
+        };
         checker();
     }, []);
 
@@ -34,15 +35,42 @@ const Main: FC = () => {
             <Route path="/home" element={<HomePage />} />
             <Route path="registration" element={<RegistrationPage />} />
             <Route path="login" element={<LoginPage />} />
-            <Route path="person" element={<Privat><PersonPage /></Privat>} />
-            <Route path="posts" element={<Privat><PostsPage /></Privat>} />
-            <Route path="posts/:id" element={<Privat><PostPage /></Privat>} />
-            <Route path="dnd" element={<Privat><DnDPage /></Privat>} />
+            <Route
+                path="person"
+                element={
+                    <Privat>
+                        <PersonPage />
+                    </Privat>
+                }
+            />
+            <Route
+                path="posts"
+                element={
+                    <Privat>
+                        <PostsPage />
+                    </Privat>
+                }
+            />
+            <Route
+                path="posts/:id"
+                element={
+                    <Privat>
+                        <PostPage />
+                    </Privat>
+                }
+            />
+            <Route
+                path="dnd"
+                element={
+                    <Privat>
+                        <DnDPage />
+                    </Privat>
+                }
+            />
+            <Route path="sandbox" element={<SandBoxPage />} />
             <Route path="*" element={<NoMatchPage />} />
         </Routes>
-
-
-    )
-}
+    );
+};
 
 export default Main;

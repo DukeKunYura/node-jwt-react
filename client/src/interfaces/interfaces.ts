@@ -1,24 +1,30 @@
-export type TAuth = "guest" | "user" | "admin";
+export type TAuth = 'guest' | 'user' | 'admin';
 
-export type TPageLink = "Home" | "Person" | "Login" | "Posts" | "DnD"
+export type TPageLink =
+    | 'Home'
+    | 'Person'
+    | 'Login'
+    | 'Posts'
+    | 'DnD'
+    | 'SandBox';
 
 export type TUser = {
-    email: string,
-    _id: string,
-    isActivated: boolean
-}
+    email: string;
+    _id: string;
+    isActivated: boolean;
+};
 
 export interface IAuthResponse {
     accessToken: string;
     refreshToken: string;
-    user: TUser
+    user: TUser;
 }
 
 export interface IPostResponse {
     userId: number;
     id: number;
     title: string;
-    body: string
+    body: string;
 }
 
 export interface RegisterUserRequestBody {
@@ -30,4 +36,4 @@ export interface RegisterUserResponseBody {
     accessToken: string;
     refreshToken: string;
     user: TUser;
-};
+}
